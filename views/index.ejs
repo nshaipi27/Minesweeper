@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Game Portal</title>
+  <!-- Example: Google Font (Optional) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      /* Simple gradient background */
+      background: linear-gradient(135deg, #fceabb, #f8b500);
+      font-family: 'Baloo 2', cursive, sans-serif;
+      color: #333;
+      
+      /* Center everything */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 2rem;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Container for the form */
+    .form-container {
+      background: rgba(255, 255, 255, 0.7);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin: 15px 0 5px;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="email"] {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+      font-size: 1rem;
+    }
+
+    /* Buttons styling */
+    button {
+      background-color: #fff;
+      border: 2px solid #f8b500;
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin: 10px 5px 0;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    button:hover {
+      background-color: #f8b500;
+      color: #fff;
+      transform: scale(1.05);
+    }
+
+    /* Leaderboard button (slightly different color) */
+    .leaderboard-button {
+      margin-top: 20px;
+      border: 2px solid #007bff;
+      color: #007bff;
+    }
+    .leaderboard-button:hover {
+      background-color: #007bff;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <h1>Ready to have fun?</h1>
+
+  <div class="form-container">
+    <form action="/players/start" method="POST">
+      <label for="username">Enter your name:</label>
+      <input type="text" id="username" name="username" required />
+
+      <label for="email">Enter your email:</label>
+      <input type="email" id="email" name="email" required />
+
+      <div>
+        <button type="submit" name="game" value="123run">123run</button>
+        <button type="submit" name="game" value="catsweeper">catsweeper</button>
+      </div>
+    </form>
+    
+    <a href="/leaderboard">
+      <button class="leaderboard-button">Leaderboard</button>
+    </a>
+    <a href="/players">
+      <button class="leaderboard-button">See all Players</button>
+    </a>
+  </div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+{
+  "name": "lab7-shaipin_rakotoal",
+  "version": "1.0.0",
+  "description": "### Description: The player will play against the computer, if they win, they can run 100 meterss, if they lose they go back 50 meters. They will win when thye will reach the final round in 700 meters.",
+  "main": "server.js",
+  "scripts": {
+    "test": "nyc mocha",
+    "coverage": "nyc --reporter=html --reporter=text mocha",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cs-205-s25/lab7-shaipin_rakotoal.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cs-205-s25/lab7-shaipin_rakotoal/issues"
+  },
+  "homepage": "https://github.com/cs-205-s25/lab7-shaipin_rakotoal#readme",
+  "dependencies": {
+    "better": "^0.1.0",
+    "better-sqlite3": "^11.9.1",
+    "canvas": "^3.1.0",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "mocha": "^11.1.0",
+    "morgan": "^1.10.0",
+    "readline-sync": "^1.4.10",
+    "sqlite": "^5.1.1",
+    "sqlite3": "^5.1.7",
+    "supertest": "^7.1.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "nyc": "^17.1.0"
+  }
+}

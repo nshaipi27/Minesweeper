@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Players List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f9fc;
+            margin: 0;
+            padding: 2rem;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        ul {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 0;
+            list-style-type: none;
+        }
+
+        li {
+            background: #fff;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        a {
+            text-decoration: none;
+            color: #3498db;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        span.email {
+            color: #555;
+            font-size: 0.9em;
+            margin-left: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>Players</h1>
+    <ul>
+        <% players.forEach(function(player) { %>
+            <li>
+                <a href="/players/<%= player.player_id %>"><%= player.username %></a> 
+                <span class="email">(<%= player.email %>)</span>
+            </li>
+        <% }); %>
+    </ul>
+</body>
+</html>

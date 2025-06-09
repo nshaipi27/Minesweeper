@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Player Details</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f9;
+            color: #333;
+            margin: 0;
+            padding: 2rem;
+        }
+
+        h1, h2 {
+            color: #2c3e50;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        p {
+            margin: 0.5rem 0;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        li {
+            background: #ecf0f1;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border-radius: 6px;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 1.5rem;
+            text-decoration: none;
+            color: #2980b9;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .no-games {
+            color: #888;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Player: <%= player.username %></h1>
+        <p><strong>Email:</strong> <%= player.email %></p>
+        <p><strong>Account Created:</strong> <%= player.created_at %></p>
+
+        <h2>Game History</h2>
+        <% if (games.length > 0) { %>
+            <ul>
+                <% games.forEach(game => { %>
+                    <li>
+                        <strong><%= game.game_name %></strong><br>
+                        Score: <%= game.score %><br>
+                        Result: <%= game.outcome %><br>
+                        Played on: <%= game.completed_at %>
+                    </li>
+                <% }) %>
+            </ul>
+        <% } else { %>
+            <p class="no-games">No games played yet.</p>
+        <% } %>
+
+        <a href="/players">&larr; Back to Players List</a>
+    </div>
+</body>
+</html>

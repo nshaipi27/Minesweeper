@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Rock Paper Scissor Run!</title>
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #fceabb, #f8b500);
+      font-family: 'Baloo 2', cursive;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+    h1 {
+      margin-top: 40px;
+      font-size: 2.5rem;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    }
+    /* Game Container */
+    #gameContainer {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+    /* Scoreboard */
+    #scoreboard {
+      background: rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(8px);
+      border-radius: 15px;
+      padding: 20px 30px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      margin: 20px 0;
+    }
+    #scoreboard li {
+      list-style: none;
+      font-size: 1.2rem;
+      margin: 8px 0;
+    }
+    /* Instruction Box */
+    #instructions {
+      background: rgba(255, 255, 255, 0.4);
+      border-radius: 10px;
+      padding: 15px 25px;
+      margin: 10px 0 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      text-align: center;
+      font-size: 1.1rem;
+    }
+    #track {
+      position: relative;
+      width: 800px;
+      height: 120px;
+      background: radial-gradient(circle, #fff, #ccc);
+      border-radius: 60px;
+      margin: 20px 0;
+      overflow: hidden;
+      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    /* Runner styling */
+    #runner {
+      position: absolute;
+      top: 10px;
+      left: 0;
+      width: 180px;
+      animation: bounce 1s infinite alternate ease-in-out;
+      transition: left 1s ease-in-out;
+    }
+    @keyframes bounce {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-5px); }
+    }
+    #battle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    .battle-image {
+      width: 100px;
+      height: 100px;
+      background-color: #fff;
+      border: 3px solid #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.3s;
+    }
+    .battle-image:hover {
+      transform: scale(1.05) rotate(3deg);
+    }
+    #vsSign {
+      font-size: 2rem;
+      color: #f8b500;
+      animation: vsPulse 1s infinite alternate ease-in-out;
+    }
+    @keyframes vsPulse {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.2); }
+    }
+    #gameButtons {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    button {
+      background-color: #fff;
+      border: 2px solid #f8b500;
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+    button:hover {
+      background-color: #f8b500;
+      color: #fff;
+      transform: scale(1.05);
+    }
+    #submitButton {
+      display: none;
+      background-color: #f8b500;
+      border: none;
+      padding: 10px 25px;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    #submitButton:hover {
+      transform: scale(1.05);
+    }
+    form {
+      margin-bottom: 40px;
+    }
+    /* Final Screen */
+    #finalScreen {
+      text-align: center;
+      margin-top: 40px;
+    }
+    #finalButtons button {
+      margin: 0 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Rock Paper Scissor, Runnn!</h1>
+  
+  <% if (playerName) { %>
+    <h2>Welcome, <%= playerName %>!</h2>
+  <% } %>
+  
+  <% if (result == null) { %>
+    <!-- visible during gameplay) -->
+    <div id="gameContainer">
+      <ul id="scoreboard">
+        <li>Round: <span id="roundDisplay">0</span> / 8</li>
+        <li id="finalMessage">Make your move!</li>
+      </ul>
+    
+      <div id="instructions">
+        Your objective: Reach the end of the track to win! Each win moves you forward and each loss moves you backward. Can you make it before 8 rounds?
+      </div>
+    
+      <div id="track">
+        <img id="runner" src="/assets/123runAssets/dance.gif" alt="Runner" />
+      </div>
+    
+      <div id="battle">
+        <div id="playerMove" class="battle-image"></div>
+        <div id="vsSign">VS</div>
+        <div id="computerMove" class="battle-image"></div>
+      </div>
+    
+      <div id="gameButtons">
+        <button type="button" onclick="playRound('Paper')">Paper</button>
+        <button type="button" onclick="playRound('Rock')">Rock</button>
+        <button type="button" onclick="playRound('Scissor')">Scissor</button>
+      </div>
+    
+      <form id="resultForm" action="/123run/result" method="POST">
+        <input type="hidden" name="playerId" value="<%= playerId %>" />
+        <input type="hidden" name="result" id="result" value="" />
+        <input type="hidden" name="score" id="scoreInput" value="<%= score %>" />
+        <input type="hidden" name="actionType" id="actionType" value="" />
+        <button type="submit" id="submitButton">End Game</button>
+      </form>
+    </div>
+  <% } else { %>
+   
+    <div id="finalScreen">
+      <p>
+        <%= result === 'Win!' ? 'Congrats' : 'Better luck next time' %>! Your total score is <%= score %>.
+      </p>
+      <div id="finalButtons">
+        <a href="/123run?<%= playerId ? 'playerId=' + playerId : '' %>">
+          <button type="button">Replay Game</button>
+        </a>
+        <a href="/">
+          <button type="button">Main Menu</button>
+        </a>
+      </div>
+    </div>
+  <% } %>
+  
+  <script>
+    let score = 0;
+    let round = 0;
+    const maxRounds = 8;
+    const winThreshold = 350;
+  
+    const roundDisplay = document.getElementById("roundDisplay");
+    const finalMessage = document.getElementById("finalMessage");
+    const submitButton = document.getElementById("submitButton");
+    const scoreInput = document.getElementById("scoreInput");
+    const runner = document.getElementById("runner");
+    const playerMoveDiv = document.getElementById("playerMove");
+    const computerMoveDiv = document.getElementById("computerMove");
+  
+    function choiceToBackground(choice) {
+      return `/assets/123runAssets/${choice.toLowerCase()}.gif`;
+    }
+  
+    function determineOutcome(player, computer) {
+      if (player === computer) return "Tie";
+      if (
+        (player === "Paper" && computer === "Rock") ||
+        (player === "Rock" && computer === "Scissor") ||
+        (player === "Scissor" && computer === "Paper")
+      ) {
+        return "Win";
+      }
+      return "Lose";
+    }
+  
+    function updateRunner() {
+      const cappedScore = Math.min(Math.max(score, 0), winThreshold);
+      const maxMovement = 400;
+      const newPos = (cappedScore / winThreshold) * maxMovement;
+      runner.style.left = newPos + "px";
+    }
+  
+    function playRound(playerChoice) {
+      if (round >= maxRounds) return;
+
+runner.src = "/assets/123runAssets/run.gif";
+
+const choices = ["Paper", "Rock", "Scissor"];
+const computerChoice = choices[Math.floor(Math.random() * choices.length)];
+const outcome = determineOutcome(playerChoice, computerChoice);
+
+if (outcome === "Win") {
+  score += 100;
+} else if (outcome === "Lose") {
+  score -= 50;
+  runner.src = "/assets/123runAssets/run.gif";
+}
+
+
+scoreInput.value = score;
+
+round++;
+roundDisplay.textContent = round;
+finalMessage.textContent = `Round ${round}: You: ${playerChoice} VS Computer: ${computerChoice}. ${outcome}!`;
+
+playerMoveDiv.style.backgroundImage = `url('${choiceToBackground(playerChoice)}')`;
+computerMoveDiv.style.backgroundImage = `url('${choiceToBackground(computerChoice)}')`;
+
+updateRunner();
+
+setTimeout(() => {
+  if (round < maxRounds) {
+    runner.src = "/assets/123runAssets/dance.gif";
+  }
+}, 1000);
+  
+      
+      if (round === maxRounds) {
+        const finalOutcome = score >= 350 ? "Win!" : "Lose!";
+        finalMessage.textContent += ` Final Score: ${score}. You ${finalOutcome}`;
+        scoreInput.value = score;
+        document.getElementById("result").value = finalOutcome;
+        submitButton.style.display = "block";
+      }
+    }
+  </script>
+</body>
+</html>

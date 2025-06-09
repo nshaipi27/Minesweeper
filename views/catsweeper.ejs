@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minesweeper</title>
+    <link rel="stylesheet" href="/styles/catsweeper.css">
+
+</head>
+
+<body>
+    <h1>Catsweeper</h1>
+
+    <% if (result==null) { %>
+        <% if (playerName) { %>
+            <h2>Welcome, <%= playerName %>!</h2>
+        <% } %>
+        <h2>Difficulty: Medium </h2>
+        <h2>Description: You are mouse! Find and reveal all the cells that don't have a cat in them!</h2>
+
+        <canvas id="gameCanvas" width="400" height="399"></canvas><br>
+        <h1 id="timer">00:00</h1>
+        <h2 id="outcome">Keep playing!</h2>
+        <h3 id = "score" style = "display: none;">Your score is </h3>
+        <form id="resultForm"  method="POST">
+            <input type="hidden" name="playerId" value="<%= playerId %>" />
+            <input type="hidden" name="result" id="result" value="" />
+            <input type="hidden" name="score" id="scoreInput" value="<%= score %>" />
+            <button type="submit" id="submitButton" style="display:none" >End Game</button>
+        </form>
+    <% } else { %>
+        <h2>Game Over!</h2>
+        <h3><%= result === 'Win!' ? 'Congrats' : 'Better luck next time' %>!</h3>
+        <h3>Your score is <%= score %></h2>
+        <a href="/">
+            <button type="button">Main Menu</button>
+        </a>
+    <% } %>
+
+
+     <script src="/js/catsweeper.js"></script>
+
+</body>
+
+</html>
