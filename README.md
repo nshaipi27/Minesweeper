@@ -1,8 +1,7 @@
 # GAME 
 
 How to run :
-[nodemon server.js or node server.js
-](https://minesweeper-d93i.onrender.com)
+https://minesweeper-d93i.onrender.com
 
 ## Landy's Game: Rock Paper Scissors Run! ✂️
 
